@@ -1,0 +1,8 @@
+{
+  "name": "Modificação",
+  "author": "Artur Fraga",
+  "version": "1.0.0",
+  "description": "Uma modificação que implementa a genética dos mundos",
+  "targetGameBuild": 558,
+  "iconPath": "icon.png"
+}
