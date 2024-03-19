@@ -15,6 +15,7 @@ namespace VanillaModifications
     {
 		public static void init()
         {
+            //testing sync again
             ActorAsset dragon = AssetManager.actor_library.get(SA.dragon);
             dragon.traits.Add("super_health");
             dragon.base_stats[S.knockback_reduction] = 1f;
