@@ -191,10 +191,72 @@ namespace VanillaModifications
             evilshield.opposite_status.Add("slowness");
             evilshield.opposite_status.Add("poisoned");
             evilshield.opposite_status.Add("shield");
+            evilshield.opposite_status.Add("blessedshield");
+            evilshield.opposite_status.Add("necroshield");
             evilshield.tier = StatusTier.Advanced;
             evilshield.action_get_hit = (GetHitAction)Delegate.Combine(evilshield.action_get_hit, new GetHitAction(evilshieldReact));
             localizeStatus("Escudo Maligno", "Escudo Maligno", evilshield.description);
             AssetManager.status.add(evilshield);
+
+            StatusEffect blessedshield = new StatusEffect();
+            blessedshield.id = "blessedshield";
+            blessedshield.duration = 90f;
+            blessedshield.texture = "fx_blessedshield";
+            blessedshield.animated = true;
+            blessedshield.base_stats[S.armor] = 100;
+            blessedshield.sound_idle = "event:/SFX/STATUS/StatusShield";
+            blessedshield.base_stats[S.knockback_reduction] = 1f;
+            blessedshield.path_icon = "ui/icons/iconBlessedShield";
+            blessedshield.description = "Protegido pelo Sagrado";
+            blessedshield.name = "Escudo Beligno";
+            blessedshield.remove_status.Add("blessed_fire");
+            blessedshield.remove_status.Add("frozen");
+            blessedshield.remove_status.Add("burning");
+            blessedshield.remove_status.Add("slowness");
+            blessedshield.remove_status.Add("poisoned");
+            blessedshield.remove_status.Add("shield");
+            blessedshield.opposite_status.Add("blessed_fire");
+            blessedshield.opposite_status.Add("frozen");
+            blessedshield.opposite_status.Add("burning");
+            blessedshield.opposite_status.Add("slowness");
+            blessedshield.opposite_status.Add("poisoned");
+            blessedshield.opposite_status.Add("shield");
+            blessedshield.opposite_status.Add("evilshield");
+            blessedshield.opposite_status.Add("necroshield");
+            blessedshield.tier = StatusTier.Advanced;
+            blessedshield.action_get_hit = (GetHitAction)Delegate.Combine(blessedshield.action_get_hit, new GetHitAction(blessedshieldReact));
+            localizeStatus("Escudo Beligno", "Escudo Beligno", blessedshield.description);
+            AssetManager.status.add(blessedshield);
+
+            StatusEffect necroshield = new StatusEffect();
+            necroshield.id = "necroshield";
+            necroshield.duration = 90f;
+            necroshield.texture = "fx_necroshield";
+            necroshield.animated = true;
+            necroshield.base_stats[S.armor] = 100;
+            necroshield.sound_idle = "event:/SFX/STATUS/StatusShield";
+            necroshield.base_stats[S.knockback_reduction] = 1f;
+            necroshield.path_icon = "ui/icons/iconNecroShield";
+            necroshield.description = "Protegido pelo Mundano";
+            necroshield.name = "Escudo Necrosado";
+            necroshield.remove_status.Add("blessed_fire");
+            necroshield.remove_status.Add("frozen");
+            necroshield.remove_status.Add("burning");
+            necroshield.remove_status.Add("slowness");
+            necroshield.remove_status.Add("poisoned");
+            necroshield.remove_status.Add("shield");
+            necroshield.opposite_status.Add("blessed_fire");
+            necroshield.opposite_status.Add("frozen");
+            necroshield.opposite_status.Add("burning");
+            necroshield.opposite_status.Add("slowness");
+            necroshield.opposite_status.Add("poisoned");
+            necroshield.opposite_status.Add("shield");
+            necroshield.opposite_status.Add("evilshield");
+            necroshield.opposite_status.Add("blessedshield");
+            necroshield.tier = StatusTier.Advanced;
+            necroshield.action_get_hit = (GetHitAction)Delegate.Combine(necroshield.action_get_hit, new GetHitAction(necroshieldReact));
+            localizeStatus("Escudo Necrosado", "Escudo Necrosado", necroshield.description);
+            AssetManager.status.add(necroshield);
 
             StatusEffect voices_in_my_head = new StatusEffect();
             voices_in_my_head.id = "voices_in_my_head";
@@ -249,6 +311,7 @@ namespace VanillaModifications
             poisoned.base_stats[S.dodge] = -0.5f;
             poisoned.opposite_status.Add("dragonshield");
             poisoned.opposite_status.Add("evilshield");
+            poisoned.opposite_status.Add("blessedshield");
             poisoned.opposite_status.Add("blessed");
             poisoned.opposite_traits.Add("dragonslayer");
             poisoned.opposite_traits.Add("blessed");
@@ -257,6 +320,7 @@ namespace VanillaModifications
             StatusEffect frozen = AssetManager.status.get("frozen");
             frozen.opposite_status.Add("dragonshield");
             frozen.opposite_status.Add("evilshield");
+            frozen.opposite_status.Add("blessedshield");
             frozen.opposite_status.Add("blessed_fire");
             frozen.opposite_status.Add("blessed");
             frozen.opposite_traits.Add("dragonslayer");
@@ -265,6 +329,7 @@ namespace VanillaModifications
             StatusEffect burning = AssetManager.status.get("burning");
             burning.opposite_status.Add("dragonshield");
             burning.opposite_status.Add("evilshield");
+            burning.opposite_status.Add("blessedshield");
             burning.opposite_status.Add("blessed_fire");
             burning.opposite_status.Add("blessed");
             burning.opposite_traits.Add("dragonslayer");
@@ -273,6 +338,7 @@ namespace VanillaModifications
             StatusEffect slowness = AssetManager.status.get("slowness");
             slowness.opposite_status.Add("dragonshield");
             slowness.opposite_status.Add("evilshield");
+            slowness.opposite_status.Add("blessedshield");
             slowness.opposite_status.Add("blessed");
             slowness.opposite_status.Add("tamed");
             slowness.opposite_traits.Add("flower_prints");
@@ -283,6 +349,8 @@ namespace VanillaModifications
             StatusEffect shield = AssetManager.status.get("shield");
             shield.opposite_status.Add("evilshield");
             shield.remove_status.Add("evilshield");
+            shield.remove_status.Add("blessedshield");
+            shield.opposite_status.Add("blessedshield");
             shield.opposite_status.Add("blessed");
             shield.opposite_traits.Add("dragonslayer");
             shield.opposite_traits.Add("mageslayer");
@@ -431,6 +499,18 @@ namespace VanillaModifications
         {
             Traits.AttachEffect(pSelf, "fx_evilshield_hit");
             pSelf.a.spawnParticle(Toolbox.color_red);
+            return true;
+        }
+        public static bool blessedshieldReact(BaseSimObject pSelf, BaseSimObject pAttackedBy, WorldTile pTile = null)
+        {
+            Traits.AttachEffect(pSelf, "fx_blessedshield_hit");
+            pSelf.a.spawnParticle(Toolbox.color_white);
+            return true;
+        }
+        public static bool necroshieldReact(BaseSimObject pSelf, BaseSimObject pAttackedBy, WorldTile pTile = null)
+        {
+            Traits.AttachEffect(pSelf, "fx_necroshield_hit");
+            pSelf.a.spawnParticle(Toolbox.makeColor("#9900ff", -1f));
             return true;
         }
         public static bool dragonslayerEffect(BaseSimObject pTarget, WorldTile pTile = null)
