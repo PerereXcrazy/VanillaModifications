@@ -418,6 +418,33 @@ namespace VanillaModifications
                 draw_light_size = 0.25f,
             });
             World.world.stackEffects.CallMethod("add", evilshieldHit);
+
+            var blessedshield = AssetManager.effects_library.add(new EffectAsset
+            {
+                id = "fx_blessedshield",
+                use_basic_prefab = true,
+                sorting_layer_id = "EffectsTop",
+                sprite_path = "effects/fx_blessedshield",
+                show_on_mini_map = false,
+                limit = 15,
+                draw_light_area = true,
+                draw_light_size = 0.25f,
+                time_between_frames = 0.08f,
+            });
+            World.world.stackEffects.CallMethod("add", blessedshield);
+
+            var blessedshieldHit = AssetManager.effects_library.add(new EffectAsset
+            {
+                id = "fx_blessedshield_hit",
+                use_basic_prefab = true,
+                sorting_layer_id = "EffectsTop",
+                sprite_path = "effects/fx_blessedshield_hit",
+                show_on_mini_map = false,
+                limit = 15,
+                draw_light_area = true,
+                draw_light_size = 0.25f,
+            });
+            World.world.stackEffects.CallMethod("add", blessedshieldHit);
         }
     }
 }
