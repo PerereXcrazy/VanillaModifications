@@ -752,6 +752,10 @@ namespace VanillaModifications
                     {
                         return "yellow";
                     }
+                    else
+                    {
+                        return "blue";
+                    }
                 }
                 else if (effect == "shield")
                 {
@@ -777,6 +781,10 @@ namespace VanillaModifications
                     else if (pTarget.a.hasTrait("blessed") || pTarget.a.hasTrait("miracle_born"))
                     {
                         return "blessed";
+                    }
+                    else
+                    {
+                        return string.Empty;
                     }
                 }
             }
