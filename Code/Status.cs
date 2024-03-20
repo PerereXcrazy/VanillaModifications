@@ -70,6 +70,8 @@ namespace VanillaModifications
             blessed_fire.material = "mat_world_object_lit";
             blessed_fire.base_stats[S.mod_speed] -= 0.5f;
             blessed_fire.opposite_status.Add("evilshield");
+            blessed_fire.opposite_status.Add("blessedshield");
+            blessed_fire.opposite_status.Add("necroshield");
             blessed_fire.opposite_status.Add("enchanted");
             blessed_fire.opposite_status.Add("frozen");
             blessed_fire.opposite_status.Add("burning");
@@ -143,6 +145,9 @@ namespace VanillaModifications
             dragonshield.opposite_status.Add("slowness");
             dragonshield.opposite_status.Add("poisoned");
             dragonshield.opposite_status.Add("dragonslayer");
+            dragonshield.opposite_status.Add("necroshield");
+            dragonshield.opposite_status.Add("blessedshield");
+            dragonshield.opposite_status.Add("evilshield");
             dragonshield.tier = StatusTier.Advanced;
             dragonshield.action_interval = 1.5f;
             dragonshield.action = (WorldAction)Delegate.Combine(dragonshield.action, new WorldAction(dragonshieldEffect));
@@ -312,6 +317,7 @@ namespace VanillaModifications
             poisoned.opposite_status.Add("dragonshield");
             poisoned.opposite_status.Add("evilshield");
             poisoned.opposite_status.Add("blessedshield");
+            poisoned.opposite_status.Add("necroshield");
             poisoned.opposite_status.Add("blessed");
             poisoned.opposite_traits.Add("dragonslayer");
             poisoned.opposite_traits.Add("blessed");
@@ -321,6 +327,7 @@ namespace VanillaModifications
             frozen.opposite_status.Add("dragonshield");
             frozen.opposite_status.Add("evilshield");
             frozen.opposite_status.Add("blessedshield");
+            frozen.opposite_status.Add("necroshield");
             frozen.opposite_status.Add("blessed_fire");
             frozen.opposite_status.Add("blessed");
             frozen.opposite_traits.Add("dragonslayer");
@@ -330,6 +337,7 @@ namespace VanillaModifications
             burning.opposite_status.Add("dragonshield");
             burning.opposite_status.Add("evilshield");
             burning.opposite_status.Add("blessedshield");
+            burning.opposite_status.Add("necroshield");
             burning.opposite_status.Add("blessed_fire");
             burning.opposite_status.Add("blessed");
             burning.opposite_traits.Add("dragonslayer");
@@ -339,6 +347,7 @@ namespace VanillaModifications
             slowness.opposite_status.Add("dragonshield");
             slowness.opposite_status.Add("evilshield");
             slowness.opposite_status.Add("blessedshield");
+            slowness.opposite_status.Add("necroshield");
             slowness.opposite_status.Add("blessed");
             slowness.opposite_status.Add("tamed");
             slowness.opposite_traits.Add("flower_prints");
@@ -350,6 +359,7 @@ namespace VanillaModifications
             shield.opposite_status.Add("evilshield");
             shield.remove_status.Add("evilshield");
             shield.remove_status.Add("blessedshield");
+            shield.remove_status.Add("necroshield");
             shield.opposite_status.Add("blessedshield");
             shield.opposite_status.Add("blessed");
             shield.opposite_traits.Add("dragonslayer");

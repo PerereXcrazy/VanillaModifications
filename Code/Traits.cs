@@ -755,7 +755,11 @@ namespace VanillaModifications
                 }
                 else if (effect == "shield")
                 {
-                    if (pTarget.a.hasTrait("evil") || pTarget.a.hasTrait("cursed"))
+                    if (pTarget.a.hasTrait("dragonslayer") && pTarget.a.hasTrait("strong_minded"))
+                    {
+                        return "dragon";
+                    }
+                    else if (pTarget.a.hasTrait("evil") || pTarget.a.hasTrait("cursed"))
                     {
                         if (pTarget.a.hasTrait("fire_proof") || pTarget.a.hasTrait("immortal") || pTarget.a.hasTrait("madness"))
                         {
@@ -2195,6 +2199,7 @@ namespace VanillaModifications
             {
                 return false;
             }
+            a.removeTrait("peaceful");
             a.addTrait("fire_proof");
             if (a.hasTrait("veteran") || a.hasTrait("scar_of_divinity"))
             {
