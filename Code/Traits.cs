@@ -1282,7 +1282,7 @@ namespace VanillaModifications
                                     {
                                         World.world.dropManager.spawn(tileSimple, SD.rain, 15f, -1f);
                                     }
-                                    if (tileSimple.Type.soil)
+                                    if (pTile.Type.soil)
                                     {
                                         if (pActor.hasTrait("mageslayer"))
                                         {
