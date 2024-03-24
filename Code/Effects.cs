@@ -195,7 +195,7 @@ namespace VanillaModifications
             {
                 id = "fx_dragon",
                 use_basic_prefab = true,
-                sorting_layer_id = "EffectsBack",
+                sorting_layer_id = "EffectsTop",
                 sprite_path = "effects/fx_dragon",
                 show_on_mini_map = false,
                 limit = 15,
