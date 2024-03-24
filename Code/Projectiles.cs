@@ -224,29 +224,6 @@ namespace VanillaModifications
                 targetScale = 0.15f,
             });
             Nature.world_actions = (AttackAction)Delegate.Combine(Nature.world_actions, new AttackAction(NatureEnd));
-            var Dragon = AssetManager.projectiles.add(new ProjectileAsset
-            {
-                id = "DragonProjectile",
-                look_at_target = true,
-                speed_random = 5f,
-                texture = "fireball",
-                trailEffect_enabled = false,
-                texture_shadow = string.Empty,
-                endEffect = "fx_dragon",
-                hitShake = true,
-                shakeDuration = 0.25f,
-                shakeInterval = 0.01f,
-                shakeIntensity = 0.125f,
-                terraformOption = "dragon_attack",
-                terraformRange = 3,
-                draw_light_area = true,
-                draw_light_size = 0.5f,
-                parabolic = false,
-                sound_launch = "event:/SFX/UNITS/UNIQUE/Dragon/DragonSwoop",
-                looped = true,
-                startScale = 0.1f,
-                targetScale = 0.25f,
-            });
         }
         public static bool BlessEnd(BaseSimObject pSelf, BaseSimObject pTarget = null, WorldTile pTile = null)
         {

@@ -197,7 +197,7 @@ namespace VanillaModifications
                 use_basic_prefab = true,
                 sorting_layer_id = "EffectsTop",
                 sprite_path = "effects/fx_dragon",
-                show_on_mini_map = false,
+                show_on_mini_map = true,
                 limit = 15,
                 draw_light_area = true,
                 draw_light_size = 0.1f,

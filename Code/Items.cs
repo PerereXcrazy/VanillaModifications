@@ -497,21 +497,28 @@ namespace VanillaModifications
             {
                 return false;
             }
-            int regeneration = pSelf.a.data.health / 20;
-            pSelf.a.restoreHealth(regeneration);
-            EffectsLibrary.spawnAt("fx_dragon", pSelf.a.currentPosition, pSelf.a.stats[S.scale]);
-            BrushData LevelBrush = Traits.ApropriateBrush(pSelf.a);
-            for (int i = 0; i < LevelBrush.pos.Length; i++)
+            if (pSelf.a.hasTrait("super_health"))
             {
-                int num = pTile.x + LevelBrush.pos[i].x;
-                int num2 = pTile.y + LevelBrush.pos[i].y;
-                if (num >= 0 && num < MapBox.width && num2 >= 0 && num2 < MapBox.height)
+                pSelf.a.restoreHealth(pSelf.a.data.health / 20);
+                EffectsLibrary.spawnAt("fx_dragon", pSelf.a.currentPosition, pSelf.a.stats[S.scale]);
+                BrushData LevelBrush = Traits.ApropriateBrush(pSelf.a);
+                for (int i = 0; i < LevelBrush.pos.Length; i++)
                 {
-                    WorldTile tileSimple = MapBox.instance.GetTileSimple(num, num2);
-                    Traits.DragonbornAttackTile(pSelf.a, tileSimple);
+                    int num = pTile.x + LevelBrush.pos[i].x;
+                    int num2 = pTile.y + LevelBrush.pos[i].y;
+                    if (num >= 0 && num < MapBox.width && num2 >= 0 && num2 < MapBox.height)
+                    {
+                        WorldTile tileSimple = MapBox.instance.GetTileSimple(num, num2);
+                        Traits.DragonbornAttackTile(pSelf.a, tileSimple);
+                    }
                 }
             }
-                    return true;
+            else
+            {
+                pSelf.a.restoreHealth(pSelf.a.data.health / 40);
+                ActionLibrary.fireBloodEffect(pSelf);
+            }
+            return true;
         }
         public static bool BlessRule(BaseSimObject pTarget, WorldTile pTile = null)
         {
