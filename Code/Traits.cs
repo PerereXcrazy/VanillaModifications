@@ -1148,6 +1148,39 @@ namespace VanillaModifications
             AttachEffect(pSelf, pEffect);
             MusicBox.playSound(pSong, pSelf.a.currentTile, false, false);
         }
+        public static void DragonbornAttackTile(Actor a, WorldTile pTile)
+        {
+            if (pTile == null)
+            {
+                return;
+            }
+            bool flag = a.hasTrait("zombie");
+            if (flag)
+            {
+                DropsLibrary.action_acid(pTile, null);
+                if (pTile.hasUnits() || Toolbox.randomBool())
+                {
+                    World.world.dropManager.spawnParabolicDrop(pTile, "acid", 0f, 0.1f, 3.5f, 0.5f, 4f, Toolbox.randomFloat(0.025f, 0.2f));
+                }
+            }
+            else
+            {
+                pTile.startFire(true);
+                if (pTile.building != null)
+                {
+                    pTile.building.getHit(10f, true, AttackType.Other, null, true, false);
+                }
+                if (pTile.hasUnits() || Toolbox.randomBool())
+                {
+                    World.world.dropManager.spawnParabolicDrop(pTile, "fire", 0f, 0.1f, 3.5f, 0.5f, 4f, Toolbox.randomFloat(0.025f, 0.2f));
+                }
+            }
+            if (!pTile.hasUnits())
+            {
+                return;
+            }
+            MapAction.damageWorld(pTile, 2, AssetManager.terraform.get(flag ? "zombie_dragon_attack" : "dragon_attack"), a);
+        }
         public static void SoilMaker(Actor pActor, WorldTile pTile)
         {
             PowerLibrary pl = new PowerLibrary();

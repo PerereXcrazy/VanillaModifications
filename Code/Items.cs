@@ -236,18 +236,18 @@ namespace VanillaModifications
             Localization.addLocalization("item_flower_prints_weapon", "Anel Florestal");
             addWeaponsSprite(flower_prints_weapon.id, flower_prints_weapon.materials[0]);
 
-            ItemAsset dragonslayer_weapon = AssetManager.items.clone("dragonslayer_weapon", "_range");
+            ItemAsset dragonslayer_weapon = AssetManager.items.clone("dragonslayer_weapon", "_melee");
             dragonslayer_weapon.id = "dragonslayer_weapon";
             dragonslayer_weapon.path_icon = "ui/Icons/items/icon_dragonslayer_adamantine";
             dragonslayer_weapon.materials = List.Of<string>(new string[] { "adamantine" });
-            dragonslayer_weapon.projectile = "DragonProjectile";
             dragonslayer_weapon.path_slash_animation = "effects/slashes/slash_base";
+            dragonslayer_weapon.base_stats[S.knockback] = 1f;
             dragonslayer_weapon.base_stats[S.accuracy] = 100f;
-            dragonslayer_weapon.base_stats[S.targets] = 15f;
+            dragonslayer_weapon.base_stats[S.targets] = 5f;
             dragonslayer_weapon.base_stats[S.mod_attack_speed] = -0.75f;
             dragonslayer_weapon.base_stats[S.critical_damage_multiplier] = 5f;
             dragonslayer_weapon.equipment_value = 100;
-            dragonslayer_weapon.attackType = WeaponType.Range;
+            dragonslayer_weapon.attackType = WeaponType.Melee;
             dragonslayer_weapon.base_stats[S.projectiles] = 1f;
             dragonslayer_weapon.name_templates = List.Of<string>(new string[]
             {
@@ -499,7 +499,19 @@ namespace VanillaModifications
             }
             int regeneration = pSelf.a.data.health / 20;
             pSelf.a.restoreHealth(regeneration);
-            return true;
+            EffectsLibrary.spawnAt("fx_dragon", pSelf.a.currentPosition, pSelf.a.stats[S.scale]);
+            BrushData LevelBrush = Traits.ApropriateBrush(pSelf.a);
+            for (int i = 0; i < LevelBrush.pos.Length; i++)
+            {
+                int num = pTile.x + LevelBrush.pos[i].x;
+                int num2 = pTile.y + LevelBrush.pos[i].y;
+                if (num >= 0 && num < MapBox.width && num2 >= 0 && num2 < MapBox.height)
+                {
+                    WorldTile tileSimple = MapBox.instance.GetTileSimple(num, num2);
+                    Traits.DragonbornAttackTile(pSelf.a, tileSimple);
+                }
+            }
+                    return true;
         }
         public static bool BlessRule(BaseSimObject pTarget, WorldTile pTile = null)
         {
