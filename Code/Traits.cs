@@ -2320,7 +2320,7 @@ namespace VanillaModifications
                 }
                 MusicBox.playSound("event:/SFX/UNITS/UNIQUE/Dragon/DragonDeath", pTile, false, false);
                 Actor actor = World.world.units.spawnNewUnit(SA.dragon, pTarget.a.currentTile, true, 0f);
-                EffectsLibrary.spawnAt("fx_dragon", actor.currentPosition, actor.stats[S.scale]);
+                EffectsLibrary.spawnAt("fx_dragon_actor_death", actor.currentPosition, actor.stats[S.scale]);
                 World.world.applyForce(pTile, 5, 5, true, true, 5, null, pTarget, null);
             }
             return true;
