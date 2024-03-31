@@ -930,7 +930,7 @@ namespace VanillaModifications
         {
             Actor a = pTarget.a;
             BaseSimObject attackedBy = a.attackedBy;
-            if (a.asset.unit == false && a.kingdom.data.banner_icon_id == -1)
+            if (a.asset.unit == false || a.kingdom.data.banner_icon_id == -1)
             {
                 return false;
             }
