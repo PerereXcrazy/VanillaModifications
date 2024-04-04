@@ -1464,16 +1464,16 @@ namespace VanillaModifications
                 a.addTrait("light_lamp");
                 if (pTarget.a.data.profession == UnitProfession.King)
                 {
-                    a.addTrait("shiny");
+                    a.addTrait("healing_aura");
                 }
                 else
                 {
-                    a.removeTrait("shiny");
+                    a.removeTrait("healing_aura");
                 }
             }
             else if (!a.hasTrait("scar_of_divinity"))
             {
-                a.removeTrait("shiny");
+                a.removeTrait("healing_aura");
                 a.removeTrait("light_lamp");
             }
             if (a.asset.unit == false || a.hasWeapon())
@@ -1539,7 +1539,7 @@ namespace VanillaModifications
             {
                 traitDeathEffect(pTarget, SD.blessing);
             }
-            if (a.hasTrait("shiny") && attackedBy != null && attackedBy.isActor() && attackedBy.a.asset.id != "angel")
+            if (a.hasTrait("healing_aura") && attackedBy != null && attackedBy.isActor() && attackedBy.a.asset.id != "angel")
             {
                 if (attackedBy.a.data.level < a.data.level || attackedBy.a.data.level == 1)
                 {
