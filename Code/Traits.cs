@@ -1910,6 +1910,7 @@ namespace VanillaModifications
         {
             int num = pTarget.a.data.level;
             PowerLibrary pl = new PowerLibrary();
+            pl.spawnCloud(pTile, "cloud_fire");
             for (int i = 0; i < num; i++)
             {
                 if (num > 11)

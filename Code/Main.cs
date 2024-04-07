@@ -16,6 +16,7 @@ namespace VanillaModifications
     {
         void Awake()
         {
+            Clouds.init();
             Drops.init();
             Resource.init();
             Items.init();
