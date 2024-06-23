@@ -31,7 +31,7 @@ namespace VanillaModifications
             list3.AddRange(list);
             var fire = AssetManager.clouds.add(new CloudAsset
             {
-                id = "cloud_fire2",
+                id = "cloud_fire3",
                 color = Toolbox.makeColor("#FFB229", -1f),
                 drop_id = SD.fire,
                 path_sprites = list,
@@ -42,8 +42,8 @@ namespace VanillaModifications
             });
             AssetManager.clouds.add(fire);
 
-            CloudAsset fire2 = new CloudAsset();
-            fire2.id = "cloud_fire";
+            var fire2 = AssetManager.clouds.add(new CloudAsset());
+            fire2.id = "cloud_fire2";
             fire2.color = Toolbox.makeColor("#FFB229", -1f);
             fire2.drop_id = SD.fire;
             fire2.path_sprites = list;
@@ -52,6 +52,18 @@ namespace VanillaModifications
             fire2.considered_disaster = true;
             fire2.draw_light_area = true;
             AssetManager.clouds.add(fire2);
+
+            AssetManager.clouds.add(new CloudAsset
+            {
+                id = "cloud_fire",
+                color = Toolbox.makeColor("#FF3030", -1f),
+                drop_id = "rage",
+                cloud_action_1 = new CloudAction(CloudLibrary.dropAction),
+                path_sprites = list,
+                speed_max = 4f,
+                considered_disaster = true,
+                draw_light_area = true
+            });
         }
     }
 }

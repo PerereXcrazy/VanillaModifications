@@ -1513,7 +1513,7 @@ namespace VanillaModifications
             for (int i = 0; i < World.world.temp_map_objects.Count; i++)
             {
                 Actor actor = (Actor)World.world.temp_map_objects[i];
-                if (a.kingdom.data.banner_icon_id > -1 && actor.asset.unit == false && actor.hasTrait("blessed") && actor.kingdom != a.kingdom && !actor.hasStatus("civilized"))
+                if (a.kingdom.data.banner_icon_id > -1 && actor.asset.unit == false && actor.hasTrait("blessed") && actor.kingdom != a.kingdom && !actor.hasStatus("civilized") && !isCorrupted(actor))
                 {
                     actor.addStatusEffect("civilized");
                     actor.removeTrait("peaceful");
@@ -1696,7 +1696,7 @@ namespace VanillaModifications
                     for (int i = 0; i < World.world.temp_map_objects.Count - 1; i++)
                     {
                         Actor actor = (Actor)World.world.temp_map_objects[i];
-                        if (a.kingdom.data.banner_icon_id > -1 && actor.asset.unit == false && actor.hasTrait("energized") && actor.kingdom != a.kingdom && !actor.hasStatus("civilized"))
+                        if (a.kingdom.data.banner_icon_id > -1 && actor.asset.unit == false && actor.hasTrait("energized") && actor.kingdom != a.kingdom && !actor.hasStatus("civilized") && !isCorrupted(actor))
                         {
                             actor.addStatusEffect("civilized");
                             actor.removeTrait("peaceful");
@@ -1886,7 +1886,7 @@ namespace VanillaModifications
             for (int i = 0; i < World.world.temp_map_objects.Count; i++)
             {
                 Actor actor = (Actor)World.world.temp_map_objects[i];
-                if (a.kingdom.data.banner_icon_id > -1 && actor.asset.unit == false && actor.hasTrait("fire_blood") && actor.asset.id != SA.dragon && actor.kingdom != a.kingdom && !actor.hasStatus("civilized"))
+                if (a.kingdom.data.banner_icon_id > -1 && actor.asset.unit == false && actor.hasTrait("fire_blood") && actor.asset.id != SA.dragon && actor.kingdom != a.kingdom && !actor.hasStatus("civilized") && !isCorrupted(actor))
                 {
                     actor.removeTrait("burning_feet");
                     actor.addStatusEffect("civilized");
@@ -1910,7 +1910,6 @@ namespace VanillaModifications
         {
             int num = pTarget.a.data.level;
             PowerLibrary pl = new PowerLibrary();
-            pl.spawnCloud(pTile, "cloud_fire");
             for (int i = 0; i < num; i++)
             {
                 if (num > 11)
@@ -1947,7 +1946,7 @@ namespace VanillaModifications
             for (int i = 0; i < World.world.temp_map_objects.Count; i++)
             {
                 Actor actor = (Actor)World.world.temp_map_objects[i];
-                if (a.kingdom.data.banner_icon_id > -1 && actor.asset.unit == false && actor.hasTrait("cold_aura") && actor.kingdom != a.kingdom && !actor.hasStatus("civilized"))
+                if (a.kingdom.data.banner_icon_id > -1 && actor.asset.unit == false && actor.hasTrait("cold_aura") && actor.kingdom != a.kingdom && !actor.hasStatus("civilized") && !isCorrupted(actor))
                 {
                     actor.addStatusEffect("civilized");
                     actor.setKingdom(a.kingdom);
@@ -2012,7 +2011,7 @@ namespace VanillaModifications
             for (int i = 0; i < World.world.temp_map_objects.Count; i++)
             {
                 Actor actor = (Actor)World.world.temp_map_objects[i];
-                if (a.kingdom.data.banner_icon_id > -1 && actor.asset.unit == false && actor.hasTrait("acid_blood") && actor.kingdom != a.kingdom && !actor.hasStatus("civilized"))
+                if (a.kingdom.data.banner_icon_id > -1 && actor.asset.unit == false && actor.hasTrait("acid_blood") && actor.kingdom != a.kingdom && !actor.hasStatus("civilized") && !isCorrupted(actor))
                 {
                     actor.addStatusEffect("civilized");
                     actor.setKingdom(a.kingdom);
@@ -2083,7 +2082,7 @@ namespace VanillaModifications
             for (int i = 0; i < World.world.temp_map_objects.Count; i++)
             {
                 Actor actor = (Actor)World.world.temp_map_objects[i];
-                if (a.kingdom.data.banner_icon_id > -1 && actor.asset.unit == false && actor.kingdom != a.kingdom && !actor.hasStatus("civilized"))
+                if (a.kingdom.data.banner_icon_id > -1 && actor.asset.unit == false && actor.kingdom != a.kingdom && !actor.hasStatus("civilized") && !isCorrupted(actor))
                 {
                     if (actor.hasTrait("venomous") || actor.hasTrait("poisonous"))
                     {
@@ -2163,7 +2162,7 @@ namespace VanillaModifications
             for (int i = 0; i < World.world.temp_map_objects.Count; i++)
             {
                 Actor actor = (Actor)World.world.temp_map_objects[i];
-                if (a.kingdom.data.banner_icon_id > -1 && actor.kingdom != a.kingdom && !actor.hasStatus("civilized"))
+                if (a.kingdom.data.banner_icon_id > -1 && actor.kingdom != a.kingdom && !actor.hasStatus("civilized") && !isCorrupted(actor))
                 {
                     if (actor.asset.animal == true || actor.asset.oceanCreature == true || actor.asset.unit == false && actor.hasTrait("flower_prints"))
                     {
@@ -2481,7 +2480,7 @@ namespace VanillaModifications
             for (int i = 0; i < World.world.temp_map_objects.Count; i++)
             {
                 Actor actor = (Actor)World.world.temp_map_objects[i];
-                if (a.kingdom.data.banner_icon_id > -1 && actor.kingdom != a.kingdom && !actor.hasStatus("civilized"))
+                if (a.kingdom.data.banner_icon_id > -1 && actor.kingdom != a.kingdom && !actor.hasStatus("civilized") && !isCorrupted(actor))
                 {
                     if (actor.asset.nameLocale == "White Mage" || actor.asset.nameLocale == "Necromancer" || actor.asset.nameLocale == "Evil Mage" || actor.asset.race == SK.undead)
                     {
@@ -2598,7 +2597,7 @@ namespace VanillaModifications
             for (int i = 0; i < World.world.temp_map_objects.Count; i++)
             {
                 Actor actor = (Actor)World.world.temp_map_objects[i];
-                if (actor.kingdom != a.kingdom && !actor.hasStatus("civilized"))
+                if (actor.kingdom != a.kingdom && !actor.hasStatus("civilized") && !isCorrupted(actor))
                 {
                     if (a.kingdom.data.banner_icon_id > -1 && actor.asset.nameLocale == "White Mage" || actor.asset.nameLocale == "Necromancer" || actor.asset.nameLocale == "Evil Mage" || actor.asset.race == SK.undead)
                     {
