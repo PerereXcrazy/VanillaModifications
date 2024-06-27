@@ -876,14 +876,17 @@ namespace VanillaModifications
                 return false;
             }
             string text = ApropriateEffect(pSelf, "teleport");
-            EffectsLibrary.spawnAt(text, pSelf.currentPosition, pSelf.a.stats[S.scale]);
-            BaseEffect baseEffect = EffectsLibrary.spawnAt(text, worldTile2.posV3, pSelf.a.stats[S.scale]);
-            if (baseEffect != null)
+            if (text != null)
             {
-                baseEffect.spriteAnimation.setFrameIndex(9);
+                EffectsLibrary.spawnAt(text, pSelf.currentPosition, pSelf.a.stats[S.scale]);
+                BaseEffect baseEffect = EffectsLibrary.spawnAt(text, worldTile2.posV3, pSelf.a.stats[S.scale]);
+                if (baseEffect != null)
+                {
+                    baseEffect.spriteAnimation.setFrameIndex(9);
+                }
+                pSelf.a.cancelAllBeh(null);
+                pSelf.a.spawnOn(worldTile2, 0f);
             }
-            pSelf.a.cancelAllBeh(null);
-            pSelf.a.spawnOn(worldTile2, 0f);
             return true;
         }
         static string ApostropheDivino(char[] letras)

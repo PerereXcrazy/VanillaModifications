@@ -158,13 +158,13 @@ namespace VanillaModifications
             acid_blood_weapon.projectile = "AcidProjectile";
             acid_blood_weapon.path_slash_animation = "effects/slashes/slash_base";
             acid_blood_weapon.base_stats[S.attack_speed] = 1.5f;
-            acid_blood_weapon.base_stats[S.mod_damage] = -0.5f;
+            acid_blood_weapon.base_stats[S.mod_damage] = -0.75f;
             acid_blood_weapon.base_stats[S.accuracy] = 1f;
             acid_blood_weapon.base_stats[S.targets] = 2f;
             acid_blood_weapon.base_stats[S.critical_damage_multiplier] = 0.1f;
             acid_blood_weapon.equipment_value = 100;
             acid_blood_weapon.attackType = WeaponType.Range;
-            acid_blood_weapon.base_stats[S.projectiles] = 4f;
+            acid_blood_weapon.base_stats[S.projectiles] = 3f;
             acid_blood_weapon.base_stats[S.range] = 100f;
             acid_blood_weapon.name_templates = Toolbox.splitStringIntoList(new string[]
             {
