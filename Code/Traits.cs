@@ -212,6 +212,7 @@ namespace VanillaModifications
             ActorTrait ao = AssetManager.traits.get("healing_aura");
             ao.birth = 0f;
             ao.inherit = inherit;
+            ao.action_special_effect = new WorldAction(FairyAura);
 
             ActorTrait ap = AssetManager.traits.get("savage");
             ap.birth = 0f;
@@ -919,6 +920,30 @@ namespace VanillaModifications
             string ArrangedWords1 = new string(LettersArray1.ToArray());
             string ArrangedWords2 = new string(LettersArray2.ToArray());
             return ArrangedWords1.Equals(ArrangedWords2);
+        }
+        public static bool FairyAura(BaseSimObject pTarget, WorldTile pTile = null)
+        {
+            if (pTarget.a.asset.nameLocale == "Fairy")
+            {
+                Action[] Drops = {
+                () => BuildingActions.tryGrowVegetationRandom(pTile, VegetationType.Plants, false, false),
+                () => BuildingActions.tryGrowMineralRandom(pTile),
+                () => BuildingActions.tryGrowVegetationRandom(pTile, VegetationType.Trees, false, false),
+                () => World.world.buildings.addBuilding(SB.fruit_bush, pTile, true, false, BuildPlacingType.New)
+                };
+                int random = Toolbox.randomInt(0, Drops.Length);
+                Drops[random]();
+                Console.ReadLine();
+                if (pTile.Type.farm_field)
+                {
+                    World.world.dropManager.spawn(pTile, SD.fertilizerPlants, 15f, -1f);
+                }
+            }
+            else
+            {
+                return false;
+            }
+            return true;
         }
         public static bool ReactiveChildren(BaseSimObject pTarget, WorldTile pTile = null)
         {
@@ -2148,7 +2173,7 @@ namespace VanillaModifications
             SoilMaker(a, pTile);
             if (a.asset.unit == false)
             {
-                return false;
+                    return false;
             }
             EnemyFinderData enemiesTarget = EnemiesFinder.findEnemiesFrom(pTile, pTarget.kingdom, -1);
             if (enemiesTarget != null && enemiesTarget.list != null)
