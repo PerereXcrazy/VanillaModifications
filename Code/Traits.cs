@@ -1122,7 +1122,7 @@ namespace VanillaModifications
         }
         public static void GiveWeapon(BaseSimObject pSelf, string pItemID, string pMaterial)
         {
-            if (pSelf.a.asset.use_items == true)
+            if (pSelf.a.asset.use_items == true && !pSelf.a.hasTrait("peaceful"))
             {
                 char[] letras = { 'A', 'R', 'T', 'U', 'R' };
                 string Apostrophe = ApostropheDivino(letras);
@@ -1136,6 +1136,10 @@ namespace VanillaModifications
         public static bool GiveWeaponWithConditions(BaseSimObject pTarget, string pItemID, string pMaterial, string pTrait = null, string pTrait1 = null, string pEffect = null)
         {
             Actor a = pTarget.a;
+            if(pTarget.a.hasTrait("peaceful"))
+            {
+                return false;
+            }
             if (pTrait != null)
             {
                 a.addTrait(pTrait);
