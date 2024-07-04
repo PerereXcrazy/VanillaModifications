@@ -335,6 +335,11 @@ namespace VanillaModifications
             bp.birth = 0f;
             bp.inherit = inherit;
 
+            ActorTrait bq = AssetManager.traits.get("peaceful");
+            bq.birth = 0f;
+            bq.inherit = inherit;
+            bq.action_death = new WorldAction(peaceful);
+
             ActorTrait br = AssetManager.traits.get("fire_proof");
             br.birth = 0f;
             br.inherit = inherit;
@@ -514,6 +519,18 @@ namespace VanillaModifications
             }
             return true;
         }
+        public static bool peaceful(BaseSimObject pTarget, WorldTile pTile = null)
+        {
+            if (pTarget.a.equipment != null)
+            {
+                ActorEquipmentSlot slot = pTarget.a.equipment.getSlot(EquipmentType.Weapon);
+                if (!slot.isEmpty())
+                {
+                    slot.emptySlot();
+                }
+            }
+            return true;
+        }
         public static bool traitDeathEffect(BaseSimObject pTarget, string pDrop)
         {
             for (int i = 0; i < 5; i++)
@@ -550,6 +567,7 @@ namespace VanillaModifications
         }
         public static void clearBadTraitsFrom(BaseSimObject pTarget)
         {
+            pTarget.a.removeTrait("cursed");
             pTarget.a.removeTrait("infected");
             pTarget.a.removeTrait("plague");
             pTarget.a.removeTrait("mushSpores");
