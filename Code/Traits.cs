@@ -336,9 +336,7 @@ namespace VanillaModifications
             bp.inherit = inherit;
 
             ActorTrait bq = AssetManager.traits.get("peaceful");
-            bq.birth = 0f;
-            bq.inherit = inherit;
-            bq.action_death = new WorldAction(peaceful);
+            bq.action_special_effect = new WorldAction(peaceful);
 
             ActorTrait br = AssetManager.traits.get("fire_proof");
             br.birth = 0f;
