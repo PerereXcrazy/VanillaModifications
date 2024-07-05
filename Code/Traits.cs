@@ -144,7 +144,6 @@ namespace VanillaModifications
 
             ActorTrait aa = AssetManager.traits.get("voices_in_my_head");
             aa.birth = 0f;
-            aa.inherit = 25f;
 
             ActorTrait ab = AssetManager.traits.get("lustful");
             ab.birth = 0f;
