@@ -159,7 +159,7 @@ namespace VanillaModifications
             }
             if (pTarget.isActor())
             {
-                if (__instance.a.asset.unit == true && pTarget.a.asset.unit == true)
+                if (__instance.isActor() && __instance.a.asset.unit == true && pTarget.a.asset.unit == true)
                 {
                     Actor actor = pTarget.a;
                     if (!actor.asset.canBeKilledByStuff)
