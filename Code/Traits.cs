@@ -1059,7 +1059,7 @@ namespace VanillaModifications
         }
         public static bool accuratebubbleDefense(BaseSimObject pSelf, BaseSimObject pAttackedBy, WorldTile pTile = null)
         {
-            if (pSelf.isAlive() && Toolbox.randomChance(0.1f))
+            if (pSelf.isAlive() && Toolbox.randomChance(0.1f) && ApropriateEffect(pSelf, "shield") != null)
             {
                 pSelf.addStatusEffect(ApropriateEffect(pSelf, "shield"), 5f);
                 return true;
