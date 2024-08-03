@@ -864,7 +864,7 @@ namespace VanillaModifications
         }
         public static bool isCorrupted(BaseSimObject pTarget)
         {
-            return pTarget.a.hasTrait("zombie") || pTarget.a.hasTrait("plague") || pTarget.a.hasTrait("infected") || pTarget.a.hasTrait("tumorInfection") || pTarget.a.hasTrait("mushSpores") || pTarget.a.hasTrait("cursed") || pTarget.a.asset.nameLocale == "Skeleton" || pTarget.a.asset.kingdom == SK.tumor;
+            return pTarget.a.hasTrait("zombie") || pTarget.a.hasTrait("plague") || pTarget.a.hasTrait("infected") || pTarget.a.hasTrait("tumorInfection") || pTarget.a.hasTrait("mushSpores") || pTarget.a.hasTrait("cursed") || pTarget.a.asset.nameLocale == "Skeleton" || pTarget.a.kingdom = SK.undead || pTarget.a.asset.kingdom == SK.tumor;
         }
         public static bool TeleportRandom(BaseSimObject pSelf)
         {
