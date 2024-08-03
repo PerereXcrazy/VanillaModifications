@@ -19,7 +19,7 @@ namespace VanillaModifications
             energized_weapon.id = "energized_weapon";
             energized_weapon.path_icon = "ui/Icons/items/icon_ring_energized_base";
             energized_weapon.materials = List.Of<string>(new string[] { "base" });
-            energized_weapon.path_slash_animation = "effects/slashes/slash_base";
+            energized_weapon.path_slash_animation = "effects/slashes/slash_spear";
             energized_weapon.base_stats[S.knockback] = 2f;
             energized_weapon.base_stats[S.range] = 2f;
             energized_weapon.base_stats[S.accuracy] = 1f;
@@ -295,7 +295,6 @@ namespace VanillaModifications
         {
             if (pTarget != null && pTarget.isActor())
             {
-                Traits.Projectile(pSelf, pTarget, pTile, "LightningProjectile");
                 int regeneration = pTarget.a.getMaxHealth() - pTarget.a.data.health;
                 pSelf.a.restoreHealth(regeneration);
                 pTarget.a.spawnParticle(Toolbox.color_heal);
