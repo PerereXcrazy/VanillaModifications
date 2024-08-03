@@ -43,6 +43,7 @@ namespace VanillaModifications
             ActorTrait energized = AssetManager.traits.get("energized");
             energized.group_id = TraitGroup.miscellaneous;
             energized.inherit = inherit;
+            energized.base_stats[S.knockback_reduction] = 0.375f;
             energized.action_get_hit = new GetHitAction(LightningReact);
             energized.action_attack_target = new AttackAction(LightningAttack);
             energized.action_special_effect = new WorldAction(LightningConditions);

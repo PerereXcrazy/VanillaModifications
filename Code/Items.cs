@@ -23,7 +23,7 @@ namespace VanillaModifications
             energized_weapon.base_stats[S.knockback] = 2f;
             energized_weapon.base_stats[S.range] = 2f;
             energized_weapon.base_stats[S.accuracy] = 1f;
-            energized_weapon.base_stats[S.critical_damage_multiplier] = 0.1f;
+            energized_weapon.base_stats[S.critical_damage_multiplier] = 2f;
             energized_weapon.equipment_value = 100;
             energized_weapon.attackType = WeaponType.Melee;
             energized_weapon.name_templates = Toolbox.splitStringIntoList(new string[]
