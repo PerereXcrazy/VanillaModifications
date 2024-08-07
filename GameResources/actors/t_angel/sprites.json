@@ -3,47 +3,47 @@
     {
       "Path": "walk_0_item.png",
       "PivotX": 1.5,
-      "PivotY": 2.5
+      "PivotY": 1.875
     },
     {
       "Path": "walk_1_item.png",
       "PivotX": 1.5,
-      "PivotY": 2.75
+      "PivotY": 2.125
     },
     {
       "Path": "walk_2_item.png",
       "PivotX": 1.5,
-      "PivotY": 3.25
+      "PivotY": 2.625
     },
     {
       "Path": "walk_3_item.png",
       "PivotX": 1.5,
-      "PivotY": 3.25
+      "PivotY": 2.625
     },
     {
       "Path": "walk_4_item.png",
       "PivotX": 1.5,
-      "PivotY": 2.75
+      "PivotY": 1.875
     },
     {
       "Path": "idle_0_item.png",
       "PivotX": 1.5,
-      "PivotY": 2.5
+      "PivotY": 1.875
     },
     {
       "Path": "idle_1_item.png",
       "PivotX": 1.5,
-      "PivotY": 2.5
+      "PivotY": 1.875
     },
     {
       "Path": "idle_2_item.png",
       "PivotX": 1.5,
-      "PivotY": 2.5
+      "PivotY": 1.875
     },
     {
       "Path": "idle_3_item.png",
       "PivotX": 1.5,
-      "PivotY": 2.5
+      "PivotY": 1.875
     }]
 
 }

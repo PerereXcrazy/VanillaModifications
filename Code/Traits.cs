@@ -712,34 +712,44 @@ namespace VanillaModifications
         }
         public static string MageType(Actor a)
         {
-            if (!a.hasTrait("veteran"))
+            if (!a.hasTrait("blessed"))
             {
-                if (a.data.level < 5 && !isCorrupted(a))
+                if (!a.hasTrait("veteran"))
                 {
-                    if (a.data.level > 1 || StatusTrait(a, "peaceful") || a.hasTrait("wise"))
+                    if (a.data.level < 5 && !isCorrupted(a))
                     {
-                        if (!a.hasStatus("death_mark") && !a.hasStatus("voices_in_my_head"))
+                        if (a.data.level > 1 || StatusTrait(a, "peaceful") || a.hasTrait("wise"))
                         {
-                            return "whitemage";
+                            if (!a.hasStatus("death_mark") && !a.hasStatus("voices_in_my_head"))
+                            {
+                                return "whitemage";
+                            }
+                        }
+                    }
+                    if (a.data.level < 9)
+                    {
+                        if (a.data.level > 4 || StatusTrait(a, "death_mark") || isCorrupted(a))
+                        {
+                            if (!a.hasStatus("peaceful") && !a.hasStatus("voices_in_my_head"))
+                            {
+                                return "necromancer";
+                            }
                         }
                     }
                 }
-                if (a.data.level < 9)
+                if (a.data.level > 8 || StatusTrait(a, "voices_in_my_head") || a.hasTrait("veteran"))
                 {
-                    if (a.data.level > 4 || StatusTrait(a, "death_mark") || isCorrupted(a))
+                    if (!a.hasStatus("peaceful") && !a.hasStatus("death_mark") && !isCorrupted(a))
                     {
-                        if (!a.hasStatus("peaceful") && !a.hasStatus("voices_in_my_head"))
-                        {
-                            return "necromancer";
-                        }
+                        return "evilmage";
                     }
                 }
             }
-            if (a.data.level > 8 || StatusTrait(a, "voices_in_my_head") || a.hasTrait("veteran"))
+            if (a.hasTrait("blessed"))
             {
-                if (!a.hasStatus("peaceful") && !a.hasStatus("death_mark") && !isCorrupted(a))
+                if (!a.hasStatus("voices_in_my_head") && !a.hasStatus("peaceful") && !a.hasStatus("death_mark") && !isCorrupted(a))
                 {
-                    return "evilmage";
+                    return "angel";
                 }
             }
             return null;
@@ -750,7 +760,11 @@ namespace VanillaModifications
             {
                 if (effect == "teleport")
                 {
-                    if (pTarget.a.hasTrait("evil") || pTarget.a.hasTrait("cursed"))
+                    if (pTarget.a.hasTrait("blessed"))
+                    {
+                        return "yellow";
+                    }
+                    else if (pTarget.a.hasTrait("evil") || pTarget.a.hasTrait("cursed"))
                     {
                         if (pTarget.a.hasTrait("fire_proof") || pTarget.a.hasTrait("immortal") || pTarget.a.hasTrait("madness"))
                         {
@@ -765,7 +779,7 @@ namespace VanillaModifications
                     {
                         return "blue";
                     }
-                    else if (pTarget.a.hasTrait("blessed") || pTarget.a.hasTrait("miracle_born"))
+                    else if (pTarget.a.hasTrait("miracle_born"))
                     {
                         return "yellow";
                     }
@@ -779,6 +793,10 @@ namespace VanillaModifications
                     if (pTarget.a.hasTrait("dragonslayer") && pTarget.a.hasTrait("strong_minded"))
                     {
                         return "dragon";
+                    }
+                    if (pTarget.a.hasTrait("blessed"))
+                    {
+                        return "good";
                     }
                     else if (pTarget.a.hasTrait("evil") || pTarget.a.hasTrait("cursed"))
                     {
@@ -795,9 +813,9 @@ namespace VanillaModifications
                     {
                         return string.Empty;
                     }
-                    else if (pTarget.a.hasTrait("blessed") || pTarget.a.hasTrait("miracle_born"))
+                    else if (pTarget.a.hasTrait("miracle_born"))
                     {
-                        return "blessed";
+                        return "good";
                     }
                     else
                     {
@@ -807,7 +825,11 @@ namespace VanillaModifications
             }
             else
             {
-                if (pTarget.a.hasTrait("evil") || pTarget.a.hasTrait("cursed"))
+                if (pTarget.a.hasTrait("blessed"))
+                {
+                    return "angel";
+                }
+                else if (pTarget.a.hasTrait("evil") || pTarget.a.hasTrait("cursed"))
                 {
                     if (pTarget.a.hasTrait("fire_proof") && pTarget.a.hasTrait("immortal"))
                     {
@@ -821,10 +843,6 @@ namespace VanillaModifications
                 if (pTarget.a.hasTrait("freeze_proof"))
                 {
                     return "whitemage";
-                }
-                else if (pTarget.a.hasTrait("blessed"))
-                {
-                    return "blessed";
                 }
             }
             return null;
@@ -1507,22 +1525,30 @@ namespace VanillaModifications
         public static bool BlessedConditions(BaseSimObject pTarget, WorldTile pTile = null)
         {
             Actor a = pTarget.a;
-            if (isNoble(a))
+            if (a.hasTrait("mageslayer") && a.hasTrait("lucky"))
             {
-                a.addTrait("light_lamp");
-                if (pTarget.a.data.profession == UnitProfession.King)
+                a.addTrait("fire_proof");
+                a.addTrait("immortal");
+            }
+            else
+            {
+                if (isNoble(a))
                 {
-                    a.addTrait("healing_aura");
+                    a.addTrait("light_lamp");
+                    if (pTarget.a.data.profession == UnitProfession.King)
+                    {
+                        a.addTrait("healing_aura");
+                    }
+                    else
+                    {
+                        a.removeTrait("healing_aura");
+                    }
                 }
-                else
+                else if (!a.hasTrait("scar_of_divinity"))
                 {
                     a.removeTrait("healing_aura");
+                    a.removeTrait("light_lamp");
                 }
-            }
-            else if (!a.hasTrait("scar_of_divinity"))
-            {
-                a.removeTrait("healing_aura");
-                a.removeTrait("light_lamp");
             }
             if (a.asset.unit == false || a.hasWeapon())
             {
@@ -2474,53 +2500,91 @@ namespace VanillaModifications
                     }
                 }
             }
-            if (!a.hasStatus("peaceful") && !a.hasStatus("death_mark") && !a.hasStatus("voices_in_my_head"))
+            else if (MageType(a) == "angel")
             {
-                MageRegenerationEffects(pTarget);
-                if (a.data.level < 2)
+                if (!a.hasWeapon())
                 {
-                    if (!a.hasTrait("veteran") && !a.hasTrait("wise") && !isCorrupted(a))
+                    if (a.asset.use_items == true)
                     {
-                        a.removeTrait("freeze_proof");
-                        a.removeTrait("regeneration");
-                        a.removeTrait("evil");
-                        a.removeTrait("fire_proof");
-                        a.removeTrait("immortal");
-                        if (a.equipment != null && !isNoble(a))
-                        {
-                            ActorEquipmentSlot slot = a.equipment.getSlot(EquipmentType.Weapon);
-                            if (!slot.isEmpty())
-                            {
-                                slot.emptySlot();
-                            }
-                        }
+                        GiveWeapon(a, "good_staff", "base");
+                        GiveWeaponWithMagicEffects(a, "fx_teleport_yellow", "light_lamp", null, "shiny", "healing_aura");
+                    }
+                    else if (ApropriateColor(pTarget) != "angel")
+                    {
+                        GiveWeapon(a, "good_staff", "base");
+                        GiveWeaponWithMagicEffects(a, "fx_teleport_yellow", "light_lamp", null, "shiny", "healing_aura");
                     }
                 }
                 else
                 {
-                    if (a.data.level < 5)
+                    ActorEquipmentSlot actorEquipmentSlot = a.equipment.weapon;
+                    ItemData data = actorEquipmentSlot.data;
+                    if (data.id != "good_staff")
                     {
-                        if (!a.hasTrait("veteran") && !isCorrupted(a))
+                        GiveWeapon(a, "good_staff", "base");
+                        GiveWeaponWithMagicEffects(a, "fx_teleport_yellow", "light_lamp", null, "shiny", "healing_aura");
+                    }
+                }
+            }
+            if (!a.hasStatus("peaceful") && !a.hasStatus("death_mark") && !a.hasStatus("voices_in_my_head"))
+            {
+                MageRegenerationEffects(pTarget);
+                if (a.hasTrait("blessed"))
+                {
+                    a.removeTrait("freeze_proof");
+                    a.removeTrait("regeneration");
+                    a.removeTrait("evil");
+                }
+                else
+                {
+                    a.removeTrait("healing_aura");
+                    a.removeTrait("light_lamp");
+                    a.removeTrait("shiny");
+                    if (a.data.level < 2)
+                    {
+                        if (!a.hasTrait("veteran") && !a.hasTrait("wise") && !isCorrupted(a))
                         {
+                            a.removeTrait("freeze_proof");
                             a.removeTrait("regeneration");
                             a.removeTrait("evil");
                             a.removeTrait("fire_proof");
                             a.removeTrait("immortal");
-                        }
-                    }
-                    else if (a.data.level < 9)
-                    {
-                        if (!a.hasTrait("veteran"))
-                        {
-                            a.removeTrait("freeze_proof");
-                            a.removeTrait("fire_proof");
-                            a.removeTrait("immortal");
+                            if (a.equipment != null && !isNoble(a))
+                            {
+                                ActorEquipmentSlot slot = a.equipment.getSlot(EquipmentType.Weapon);
+                                if (!slot.isEmpty())
+                                {
+                                    slot.emptySlot();
+                                }
+                            }
                         }
                     }
                     else
                     {
-                        a.removeTrait("freeze_proof");
-                        a.removeTrait("regeneration");
+                        if (a.data.level < 5)
+                        {
+                            if (!a.hasTrait("veteran") && !isCorrupted(a))
+                            {
+                                a.removeTrait("regeneration");
+                                a.removeTrait("evil");
+                                a.removeTrait("fire_proof");
+                                a.removeTrait("immortal");
+                            }
+                        }
+                        else if (a.data.level < 9)
+                        {
+                            if (!a.hasTrait("veteran"))
+                            {
+                                a.removeTrait("freeze_proof");
+                                a.removeTrait("fire_proof");
+                                a.removeTrait("immortal");
+                            }
+                        }
+                        else
+                        {
+                            a.removeTrait("freeze_proof");
+                            a.removeTrait("regeneration");
+                        }
                     }
                 }
             }
@@ -2566,7 +2630,6 @@ namespace VanillaModifications
             }
             else if (MageType(a) == "necromancer")
             {
-                MusicBox.playSound("event:/SFX/UNITS/Snowman/SnowmanDeath", pTile, false, false);
                 ActionLibrary.castSpawnSkeleton(pSelf, pTarget, pTile);
                 AttachEffect(a, "fx_cast_top_necromancer");
                 if (Toolbox.randomChance(0.025f))
@@ -2576,7 +2639,6 @@ namespace VanillaModifications
             }
             else if (MageType(a) == "evilmage")
             {
-                MusicBox.playSound("event:/SFX/UNITS/EvilMage/EvilMageDeath", pTile, false, false);
                 if (Toolbox.randomChance(0.02f))
                 {
                     AttachEffect(a, "fx_cast_top_evilmage");
@@ -2592,6 +2654,10 @@ namespace VanillaModifications
                     AttachEffect(a, "fx_cast_top_evilmage");
                     ActionLibrary.castTornado(null, pTarget, null);
                 }
+            }
+            else if (MageType(a) == "angel")
+            {
+                AttachEffect(a, "fx_cast_top_angel");
             }
             return true;
         }
@@ -2619,7 +2685,6 @@ namespace VanillaModifications
             {
                 MusicBox.playSound("event:/SFX/UNITS/Snowman/SnowmanDeath", pTile, false, false);
                 ActionLibrary.castSpawnSkeleton(pSelf, pAttackedBy, pTile);
-
                 if (a.data.health >= a.getMaxHealth() / 3 && a.data.health <= a.getMaxHealth() / 2)
                 {
                     EffectsLibrary.spawnAt("fx_cast_ground_whitemage", pSelf.currentPosition, pSelf.a.stats[S.scale]);
@@ -2638,6 +2703,48 @@ namespace VanillaModifications
                     if (!a.hasStatus("evilshield"))
                     {
                         a.addStatusEffect("evilshield");
+                    }
+                }
+            }
+            else if (MageType(a) == "angel")
+            {
+                if (pAttackedBy.a.asset.canBeKilledByDivineLight == true)
+                {
+                    pAttackedBy.a.removeTrait("fire_blood");
+                    pAttackedBy.a.removeTrait("burning_feet");
+                    pAttackedBy.a.addStatusEffect("blessed_fire");
+                    a.addExperience(33);
+                    BrushData LevelBrush = ApropriateBrush(a);
+                    for (int i = 0; i < LevelBrush.pos.Length; i++)
+                    {
+                        int num = pAttackedBy.a.currentTile.x + LevelBrush.pos[i].x;
+                        int num2 = pAttackedBy.a.currentTile.y + LevelBrush.pos[i].y;
+                        if (num >= 0 && num < MapBox.width && num2 >= 0 && num2 < MapBox.height)
+                        {
+                            WorldTile tileSimple = MapBox.instance.GetTileSimple(num, num2);
+                            DivineLightFX(tileSimple);
+                        }
+                    }
+                }
+                if (a.kingdom.data.banner_icon_id > -1)
+                {
+                    Actor fairy = World.world.units.spawnNewUnit(SA.fairy, pAttackedBy.currentTile, true, 0f);
+                    if (fairy.kingdom != a.kingdom)
+                    {
+                        fairy.removeTrait("peaceful");
+                        fairy.setKingdom(a.kingdom);
+                        fairy.addStatusEffect("civilized");
+                    }
+                }
+                if (a.data.health < a.getMaxHealth() / 3)
+                {
+                    TeleportRandom(pSelf);
+                }
+                else if (a.data.health <= a.getMaxHealth() / 2)
+                {
+                    if (!a.hasStatus("goodshield"))
+                    {
+                        a.addStatusEffect("goodshield");
                     }
                 }
             }
@@ -2695,6 +2802,15 @@ namespace VanillaModifications
                 EffectsLibrary.spawnAtTile("fx_teleport_red", pTile, pTarget.a.stats[S.scale]);
                 MusicBox.playSound("event:/SFX/UNITS/EvilMage/EvilMageDeath", pTile, false, false);
                 World.world.units.spawnNewUnit(SA.evilMage, pTarget.a.currentTile, false, 0f);
+            }
+            else if (MageType(a) == "angel")
+            {
+                if (a.asset.id != "angel")
+                {
+                    DivineLightFX(pTile);
+                    EffectsLibrary.spawnAtTile("fx_teleport_yellow", pTile, a.stats[S.scale]);
+                }
+                World.world.units.spawnNewUnit("angel", a.currentTile, true, 0f);
             }
             return true;
         }
