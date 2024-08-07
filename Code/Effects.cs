@@ -304,6 +304,35 @@ namespace VanillaModifications
             });
             World.world.stackEffects.CallMethod("add", dragonshieldHit);
 
+            var angelTop = AssetManager.effects_library.add(new EffectAsset
+            {
+                id = "fx_cast_top_angel",
+                use_basic_prefab = true,
+                sorting_layer_id = "EffectsTop",
+                sprite_path = "effects/fx_cast_top_angel",
+                show_on_mini_map = false,
+                limit = 15,
+                draw_light_area = true,
+                draw_light_size = 0.25f,
+                time_between_frames = 0.08f,
+                sound_launch = "event:/SFX/DROPS/DropBlessing",
+            });
+            World.world.stackEffects.CallMethod("add", angelTop);
+
+            var angelGround = AssetManager.effects_library.add(new EffectAsset
+            {
+                id = "fx_cast_ground_angel",
+                use_basic_prefab = true,
+                sorting_layer_id = "EffectsBack",
+                sprite_path = "effects/fx_cast_ground_angel",
+                show_on_mini_map = false,
+                limit = 15,
+                draw_light_area = true,
+                draw_light_size = 0.25f,
+                time_between_frames = 0.08f,
+            });
+            World.world.stackEffects.CallMethod("add", angelGround);
+
             var whitemageTop = AssetManager.effects_library.add(new EffectAsset
             {
                 id = "fx_cast_top_whitemage",
@@ -374,7 +403,7 @@ namespace VanillaModifications
                 draw_light_area = true,
                 draw_light_size = 0.25f,
                 time_between_frames = 0.08f,
-                sound_launch = "event:/SFX/UNITS/Demon/DemonDeath",
+                sound_launch = "event:/SFX/UNITS/EvilMage/EvilMageDeath",
             });
             World.world.stackEffects.CallMethod("add", evilmageTop);
 
@@ -419,32 +448,32 @@ namespace VanillaModifications
             });
             World.world.stackEffects.CallMethod("add", evilshieldHit);
 
-            var blessedshield = AssetManager.effects_library.add(new EffectAsset
+            var goodshield = AssetManager.effects_library.add(new EffectAsset
             {
-                id = "fx_blessedshield",
+                id = "fx_goodshield",
                 use_basic_prefab = true,
                 sorting_layer_id = "EffectsTop",
-                sprite_path = "effects/fx_blessedshield",
+                sprite_path = "effects/fx_goodshield",
                 show_on_mini_map = false,
                 limit = 15,
                 draw_light_area = true,
                 draw_light_size = 0.25f,
                 time_between_frames = 0.08f,
             });
-            World.world.stackEffects.CallMethod("add", blessedshield);
+            World.world.stackEffects.CallMethod("add", goodshield);
 
-            var blessedshieldHit = AssetManager.effects_library.add(new EffectAsset
+            var goodshieldHit = AssetManager.effects_library.add(new EffectAsset
             {
-                id = "fx_blessedshield_hit",
+                id = "fx_goodshield_hit",
                 use_basic_prefab = true,
                 sorting_layer_id = "EffectsTop",
-                sprite_path = "effects/fx_blessedshield_hit",
+                sprite_path = "effects/fx_goodshield_hit",
                 show_on_mini_map = false,
                 limit = 15,
                 draw_light_area = true,
                 draw_light_size = 0.25f,
             });
-            World.world.stackEffects.CallMethod("add", blessedshieldHit);
+            World.world.stackEffects.CallMethod("add", goodshieldHit);
 
             var necroshield = AssetManager.effects_library.add(new EffectAsset
             {

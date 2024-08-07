@@ -19,11 +19,11 @@ namespace VanillaModifications
             energized_weapon.id = "energized_weapon";
             energized_weapon.path_icon = "ui/Icons/items/icon_ring_energized_base";
             energized_weapon.materials = List.Of<string>(new string[] { "base" });
-            energized_weapon.path_slash_animation = "effects/slashes/slash_base";
+            energized_weapon.path_slash_animation = "effects/slashes/slash_spear";
             energized_weapon.base_stats[S.knockback] = 2f;
             energized_weapon.base_stats[S.range] = 2f;
             energized_weapon.base_stats[S.accuracy] = 1f;
-            energized_weapon.base_stats[S.critical_damage_multiplier] = 0.1f;
+            energized_weapon.base_stats[S.critical_damage_multiplier] = 2f;
             energized_weapon.equipment_value = 100;
             energized_weapon.attackType = WeaponType.Melee;
             energized_weapon.name_templates = Toolbox.splitStringIntoList(new string[]
@@ -265,37 +265,36 @@ namespace VanillaModifications
             Localization.addLocalization("item_dragonslayer_weapon", "Alma Dragoniana");
             addCenteredWeaponsSprite(dragonslayer_weapon.id, dragonslayer_weapon.materials[0]);
 
-            ItemAsset angel_weapon = AssetManager.items.clone("angel_weapon", "_range");
-            angel_weapon.id = "angel_weapon";
-            angel_weapon.path_icon = "ui/Icons/items/icon_angel_base";
-            angel_weapon.materials = List.Of<string>(new string[] { "base" });
-            angel_weapon.projectile = "DivineProjectile";
-            angel_weapon.path_slash_animation = "effects/slashes/slash_base";
-            angel_weapon.base_stats[S.damage_range] = 0f;
-            angel_weapon.base_stats[S.accuracy] = 100f;
-            angel_weapon.base_stats[S.targets] = 15f;
-            angel_weapon.base_stats[S.critical_damage_multiplier] = 5f;
-            angel_weapon.equipment_value = 3333;
-            angel_weapon.attackType = WeaponType.Range;
-            angel_weapon.base_stats[S.projectiles] = 3f;
-            angel_weapon.base_stats[S.range] = 1000f;
-            angel_weapon.name_templates = List.Of<string>(new string[]
+            ItemAsset good_staff = AssetManager.items.clone("good_staff", "_range");
+            good_staff.id = "good_staff";
+            good_staff.path_icon = "ui/Icons/items/icon_angel_base";
+            good_staff.materials = List.Of<string>(new string[] { "base" });
+            good_staff.projectile = "DivineProjectile";
+            good_staff.path_slash_animation = "effects/slashes/slash_base";
+            good_staff.base_stats[S.damage_range] = 0f;
+            good_staff.base_stats[S.accuracy] = 100f;
+            good_staff.base_stats[S.targets] = 15f;
+            good_staff.base_stats[S.critical_damage_multiplier] = 5f;
+            good_staff.equipment_value = 3333;
+            good_staff.attackType = WeaponType.Range;
+            good_staff.base_stats[S.projectiles] = 3f;
+            good_staff.base_stats[S.range] = 1000f;
+            good_staff.name_templates = List.Of<string>(new string[]
             {
             "white_staff_name",
             });
-            angel_weapon.action_attack_target = new AttackAction(BlessEnd);
-            angel_weapon.action_special_effect = new WorldAction(BlessRule);
-            angel_weapon.equipmentType = EquipmentType.Weapon;
-            angel_weapon.name_class = "item_class_weapon";
-            AssetManager.items.list.AddItem(angel_weapon);
-            Localization.addLocalization("item_angel_weapon", "Cajado Divino");
-            addWeaponsStaffSprite(angel_weapon.id, angel_weapon.materials[0]);
+            good_staff.action_attack_target = new AttackAction(BlessEnd);
+            good_staff.action_special_effect = new WorldAction(BlessRule);
+            good_staff.equipmentType = EquipmentType.Weapon;
+            good_staff.name_class = "item_class_weapon";
+            AssetManager.items.list.AddItem(good_staff);
+            Localization.addLocalization("item_good_staff", "Cajado Divino");
+            addWeaponsStaffSprite(good_staff.id, good_staff.materials[0]);
         }
         public static bool LightningAttack(BaseSimObject pSelf, BaseSimObject pTarget, WorldTile pTile = null)
         {
             if (pTarget != null && pTarget.isActor())
             {
-                Traits.Projectile(pSelf, pTarget, pTile, "LightningProjectile");
                 int regeneration = pTarget.a.getMaxHealth() - pTarget.a.data.health;
                 pSelf.a.restoreHealth(regeneration);
                 pTarget.a.spawnParticle(Toolbox.color_heal);

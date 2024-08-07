@@ -91,7 +91,7 @@ namespace VanillaModifications
             Angel.body_separate_part_hands = false;
             Angel.defaultWeapons = List.Of<string>(new string[]
             {
-            "angel_weapon"
+            "good_staff"
             });
             Angel.defaultWeaponsMaterial = List.Of<string>(new string[]
             {
